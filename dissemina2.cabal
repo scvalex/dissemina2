@@ -13,7 +13,7 @@ Build-Type:     Simple
 Description:
         See the @README.md@ file and the homepage for details.
 
-Extra-Source-Files:     Makefile
+Extra-Source-Files:     Makefile, Utils.hs
 
 Data-Files:             README.md, LICENSE
 
