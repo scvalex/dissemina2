@@ -9,15 +9,20 @@
 --
 --  - send the contents.
 --
+-- Rather than handling cache expiry ourselves, we @mmap(2)@ the file
+-- to memory.  This way, the OS is responsible for swapping the file
+-- in and out of memory, and Haskell's garbage collector is
+-- responsible for unmmaping the file when it's no longer needed.
+--
 module Main where
 
 import Control.Concurrent.MVar ( MVar, newMVar, modifyMVar )
 import Data.ByteString.Char8 ( ByteString )
-import qualified Data.ByteString.Char8 as BS
 import Data.Map ( Map )
 import qualified Data.Map as M
 import Network.Socket ( Socket )
 import Network.Socket.ByteString ( sendAll )
+import System.IO.MMap ( mmapFileByteString )
 import Utils ( runAcceptLoop, bindPort, readRequestUri )
 
 main :: IO ()
@@ -32,7 +37,8 @@ handleRequest cacheVar sock = do
         uri <- readRequestUri sock
         case M.lookup uri cache of
           Nothing -> do
-              fileText <- BS.readFile uri
+              -- fileText <- readFile uri
+              fileText <- mmapFileByteString uri Nothing
               return (M.insert uri fileText cache, fileText)
           Just fileText -> do
               return (cache, fileText)

@@ -32,6 +32,6 @@ Executable dissemina2-sendfile
   Ghc-options:          -Wall -threaded
 
 Executable dissemina2-cached
-  Build-depends:        base >= 4 && < 5, bytestring, containers, network
+  Build-depends:        base >= 4 && < 5, bytestring, containers, mmap, network
   Main-Is:              Cached.hs
   Ghc-options:          -Wall -threaded
