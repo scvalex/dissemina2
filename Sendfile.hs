@@ -14,4 +14,4 @@ handleRequest socket = do
     -- FIXME This should be a loop to handle partial receives.
     requestLine <- recv socket 1024
     let ("GET" : uri : _) = words requestLine
-    sendFile socket (tail uri)  -- drop the leading '/'
+    sendFile socket ('.' : uri)
