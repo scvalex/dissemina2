@@ -1,0 +1,27 @@
+Name:           dissemina2
+Version:        0.1.0
+Cabal-Version:  >= 1.8
+License:        GPL-3
+License-File:   LICENSE
+Stability:      experimental
+Author:         Alexandru Scvortov <scvalex@gmail.com>
+Maintainer:     scvalex@gmail.com
+Homepage:       https://github.com/scvalex/dissemina2
+Category:       System, Control, Network
+Synopsis:       Experiments in writing a very fast fileserver
+Build-Type:     Simple
+Description:
+        See the @README.md@ file and the homepage for details.
+
+Extra-Source-Files:     Makefile
+
+Data-Files:             README.md, LICENSE
+
+Source-repository head
+  Type:                 git
+  Location:             git://github.com/scvalex/dissemina2.git
+
+Executable dissemina2-sendfile
+  Build-depends:        base >= 4 && < 5, network, daemons, sendfile
+  Main-Is:              Sendfile.hs
+  Ghc-options:          -Wall
