@@ -1,3 +1,9 @@
+-- | A simple fileserver that uses the @sendfile(2)@ system call:
+--
+--  - receive and parse the incoming request, and
+--
+--  - @sendfile@ the requested file.
+--
 module Main where
 
 import Network.Socket ( Socket, recv )

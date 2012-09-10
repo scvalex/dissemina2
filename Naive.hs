@@ -1,3 +1,11 @@
+-- | A simple fileserver written in the naïve way:
+--
+--  - receive and parse the incoming request,
+--
+--  - read the requested file's contents as a 'ByteString', and
+--
+--  - send the contents.
+--
 module Main where
 
 import qualified Data.ByteString.Char8 as BS
