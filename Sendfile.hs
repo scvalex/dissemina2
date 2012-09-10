@@ -6,9 +6,9 @@
 --
 module Main where
 
-import Network.Socket ( Socket, recv )
+import Network.Socket ( Socket )
 import Network.Socket.SendFile ( sendFile )
-import Utils ( runAcceptLoop, bindPort )
+import Utils ( runAcceptLoop, bindPort, readRequestUri )
 
 main :: IO ()
 main = do
@@ -16,8 +16,6 @@ main = do
     runAcceptLoop lsocket handleRequest
 
 handleRequest :: Socket -> IO ()
-handleRequest socket = do
-    -- FIXME This should be a loop to handle partial receives.
-    requestLine <- recv socket 1024
-    let ("GET" : uri : _) = words requestLine
-    sendFile socket ('.' : uri)
+handleRequest sock = do
+    uri <- readRequestUri sock
+    sendFile sock uri

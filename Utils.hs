@@ -1,5 +1,5 @@
 module Utils (
-        runAcceptLoop, bindPort
+        runAcceptLoop, bindPort, readRequestUri
     ) where
 
 import Control.Monad ( forever )
@@ -9,7 +9,7 @@ import Network.Socket ( Socket, socket, sClose
                       , Family(..), SocketType(..)
                       , AddrInfo(..), AddrInfoFlag(..), getAddrInfo
                       , defaultHints, defaultProtocol, maxListenQueue
-                      , accept, bindSocket, listen
+                      , accept, bindSocket, listen, recv
                       , SocketOption(..), setSocketOption )
 
 -- | Accept connections on the given socket and spawn a new handler
@@ -37,3 +37,14 @@ bindPort port = do
              bindSocket sock (addrAddress addr)
              listen sock maxListenQueue
              return sock)
+
+-- | Read an HTTP request and return its uri.  Fails if the request
+-- isn't a @GET@ method, or if the client is too slow in sending the
+-- request.  Does no sanitisation of the request (i.e. a malicious
+-- client could request arbitrary files from the filesystem).
+readRequestUri :: Socket -> IO FilePath
+readRequestUri sock = do
+    -- FIXME Do a better job of reading the request's first line.
+    requestLine <- recv sock 1024
+    let ("GET" : uri : _) = words requestLine
+    return ('.' : uri)

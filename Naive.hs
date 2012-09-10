@@ -9,9 +9,9 @@
 module Main where
 
 import qualified Data.ByteString.Char8 as BS
-import Network.Socket ( Socket, recv )
+import Network.Socket ( Socket )
 import Network.Socket.ByteString ( sendAll )
-import Utils ( runAcceptLoop, bindPort )
+import Utils ( runAcceptLoop, bindPort, readRequestUri )
 
 main :: IO ()
 main = do
@@ -19,9 +19,7 @@ main = do
     runAcceptLoop lsocket handleRequest
 
 handleRequest :: Socket -> IO ()
-handleRequest socket = do
-    -- FIXME This should be a loop to handle partial receives.
-    requestLine <- recv socket 1024
-    let ("GET" : uri : _) = words requestLine
-    text <- BS.readFile ('.' : uri)
-    sendAll socket text
+handleRequest sock = do
+    uri <- readRequestUri sock
+    text <- BS.readFile uri
+    sendAll sock text
