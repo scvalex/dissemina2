@@ -27,7 +27,7 @@ Executable dissemina2-naive
   Ghc-options:          -Wall -threaded
 
 Executable dissemina2-sendfile
-  Build-depends:        base >= 4 && < 5, network, sendfile
+  Build-depends:        base >= 4 && < 5, bytestring, network, sendfile
   Main-Is:              Sendfile.hs
   Ghc-options:          -Wall -threaded
 
@@ -35,3 +35,13 @@ Executable dissemina2-cached
   Build-depends:        base >= 4 && < 5, bytestring, containers, mmap, network
   Main-Is:              Cached.hs
   Ghc-options:          -Wall -threaded
+
+Test-suite simple
+  Hs-Source-Dirs:       Test, .
+  Main-Is:              SimpleRequest.hs
+  Type:                 exitcode-stdio-1.0
+
+  Build-Depends:        base >= 4 && < 5, bytestring, HTTP, network
+  Ghc-Options:          -Wall -threaded
+
+  Build-Depends:        test-framework, test-framework-hunit, HUnit

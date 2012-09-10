@@ -1,3 +1,5 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 -- | A simple fileserver written in the naïve way:
 --
 --  - receive and parse the incoming request,
@@ -6,7 +8,7 @@
 --
 --  - send the contents.
 --
-module Main where
+module Naive where
 
 import qualified Data.ByteString.Char8 as BS
 import Network.Socket ( Socket )
@@ -22,4 +24,5 @@ handleRequest :: Socket -> IO ()
 handleRequest sock = do
     uri <- readRequestUri sock
     text <- BS.readFile uri
+    sendAll sock "HTTP/1.1 200 OK\r\n\r\n"
     sendAll sock text

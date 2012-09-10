@@ -1,3 +1,5 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 -- | A simple fileserver with caching:
 --
 --  - receive and parse the incoming request,
@@ -14,7 +16,7 @@
 -- in and out of memory, and Haskell's garbage collector is
 -- responsible for unmmaping the file when it's no longer needed.
 --
-module Main where
+module Cached where
 
 import Control.Concurrent.MVar ( MVar, newMVar, modifyMVar )
 import Data.ByteString.Char8 ( ByteString )
@@ -42,4 +44,5 @@ handleRequest cacheVar sock = do
               return (M.insert uri fileText cache, fileText)
           Just fileText -> do
               return (cache, fileText)
+    sendAll sock "HTTP/1.1 200 OK\r\n\r\n"
     sendAll sock text
