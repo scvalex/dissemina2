@@ -1,7 +1,7 @@
 dissemina2
 ==========
 
-> Experiments in writing a fast fileservers
+> Experiments in writing a fast fileserver
 
 Hello
 -----
