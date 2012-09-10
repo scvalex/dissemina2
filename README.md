@@ -10,12 +10,12 @@ Let's see how fast a fileserver we can write, shall we?
 
 Start off with the
 [naïve](https://github.com/scvalex/dissemina2/blob/master/Naive.hs)
-implementation with just reads a file and sends it.
+implementation that just reads a file and sends it.
 
 [Continue](https://github.com/scvalex/dissemina2/blob/master/Sendfile.hs)
 using the dedicated system call for sending files, `sendfile(2)`.
 
-Check if we can do better
+Try to see if we can do better
 [caching](https://github.com/scvalex/dissemina2/blob/master/Cached.hs)
 than the filesystem.
 
