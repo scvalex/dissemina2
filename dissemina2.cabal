@@ -8,7 +8,7 @@ Author:         Alexandru Scvortov <scvalex@gmail.com>
 Maintainer:     scvalex@gmail.com
 Homepage:       https://github.com/scvalex/dissemina2
 Category:       System, Control, Network
-Synopsis:       Experiments in writing a very fast fileserver
+Synopsis:       Experiments in writing a fast fileservers
 Build-Type:     Simple
 Description:
         See the @README.md@ file and the homepage for details.
