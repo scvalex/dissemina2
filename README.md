@@ -12,7 +12,7 @@ Start off with the
 [naïve](https://github.com/scvalex/dissemina2/blob/master/Naive.hs)
 implementation that just reads a file and sends it.
 
-[Continue](https://github.com/scvalex/dissemina2/blob/master/Sendfile.hs)
+[Continue](https://github.com/scvalex/dissemina2/blob/master/SendFile.hs)
 using the dedicated system call for sending files, `sendfile(2)`.
 
 Try to see if we can do better

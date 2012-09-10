@@ -13,7 +13,7 @@ Build-Type:     Simple
 Description:
         See the @README.md@ file and the homepage for details.
 
-Extra-Source-Files:     Makefile, Utils.hs
+Extra-Source-Files:     Makefile, Utils.hs, Test/SimpleRequestTest.hs
 
 Data-Files:             README.md, LICENSE
 
@@ -28,7 +28,7 @@ Executable dissemina2-naive
 
 Executable dissemina2-sendfile
   Build-depends:        base >= 4 && < 5, bytestring, network, sendfile
-  Main-Is:              Sendfile.hs
+  Main-Is:              SendFile.hs
   Ghc-options:          -Wall -threaded
 
 Executable dissemina2-cached
@@ -36,12 +36,32 @@ Executable dissemina2-cached
   Main-Is:              Cached.hs
   Ghc-options:          -Wall -threaded
 
-Test-suite simple
+Test-suite naive
   Hs-Source-Dirs:       Test, .
-  Main-Is:              SimpleRequest.hs
+  Main-Is:              TestNaive.hs
   Type:                 exitcode-stdio-1.0
 
   Build-Depends:        base >= 4 && < 5, bytestring, HTTP, network
+  Ghc-Options:          -Wall -threaded
+
+  Build-Depends:        test-framework, test-framework-hunit, HUnit
+
+Test-suite sendfile
+  Hs-Source-Dirs:       Test, .
+  Main-Is:              TestSendFile.hs
+  Type:                 exitcode-stdio-1.0
+
+  Build-Depends:        base >= 4 && < 5, bytestring, HTTP, network, sendfile
+  Ghc-Options:          -Wall -threaded
+
+  Build-Depends:        test-framework, test-framework-hunit, HUnit
+
+Test-suite cached
+  Hs-Source-Dirs:       Test, .
+  Main-Is:              TestCached.hs
+  Type:                 exitcode-stdio-1.0
+
+  Build-Depends:        base >= 4 && < 5, bytestring, containers, HTTP, mmap, network
   Ghc-Options:          -Wall -threaded
 
   Build-Depends:        test-framework, test-framework-hunit, HUnit
