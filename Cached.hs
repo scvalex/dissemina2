@@ -16,7 +16,7 @@
 -- in and out of memory, and Haskell's garbage collector is
 -- responsible for unmmaping the file when it's no longer needed.
 --
-module Cached where
+module Main where
 
 import Control.Concurrent.MVar ( MVar, newMVar, modifyMVar )
 import Data.ByteString.Char8 ( ByteString )

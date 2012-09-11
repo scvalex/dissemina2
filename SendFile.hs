@@ -6,7 +6,7 @@
 --
 --  - @sendfile@ the requested file.
 --
-module SendFile where
+module Main where
 
 import Data.ByteString.Char8 ()
 import Network.Socket ( Socket )
